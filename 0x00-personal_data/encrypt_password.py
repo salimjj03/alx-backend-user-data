@@ -13,7 +13,7 @@ Use the bcrypt package to perform the hashing (with hashpw).
 import bcrypt
 
 
-def hash_password(password):
+def hash_password(password: str) -> bytes:
     """
     User passwords should NEVER be stored in plain text
     in a database.
