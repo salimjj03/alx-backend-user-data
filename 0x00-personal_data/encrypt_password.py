@@ -30,3 +30,20 @@ def hash_password(password: str) -> bytes:
     hash_pass = bcrypt.hashpw(password, salt)
 
     return hash_pass
+
+
+def is_valid(hashed_password: bytes, password: str) -> bool:
+    """
+    Implement an is_valid function that expects 2 argument
+    and returns a boolean.
+
+    Arguments:
+
+    hashed_password: bytes type
+    password: string type
+
+    Use bcrypt to validate that the provided password matches
+    the hashed password.
+    """
+
+    return bcrypt.checkpw(password.encode("utf-8"), hashed_password)
