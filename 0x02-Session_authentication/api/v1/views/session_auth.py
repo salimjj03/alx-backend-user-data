@@ -42,6 +42,7 @@ def login():
     user_dic.set_cookie(getenv("SESSION_NAME"), session_id)
     return user_dic
 
+
 @app_views.route(
         '/auth_session/logout',
         methods=['DELETE'],
