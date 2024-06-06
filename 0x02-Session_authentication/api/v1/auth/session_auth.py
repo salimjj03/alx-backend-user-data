@@ -55,13 +55,12 @@ class SessionAuth(Auth):
 
         if request is None:
             return False
-        if self.session_cookie(request) is None:
+        data = self.session_cookie(request)
+        if data is None:
             return False
-        cookie = self.user_id_for_session_id(
-                self.session_cookie(request)
-                )
-        if cookie is None:
+        cookie = self.user_id_for_session_id(data)
+        if not cookie:
             return False
 
-        del self.user_id_by_session_id[cookie]
+        del self.user_id_by_session_id[data]
         return True
