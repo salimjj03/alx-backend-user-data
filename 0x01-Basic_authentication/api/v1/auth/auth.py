@@ -19,6 +19,11 @@ class Auth:
         care of them
         """
 
+        for i in excluded_paths:
+            if i[-1] == "*":
+                if i in path:
+                    return False
+
         if path is not None:
             last = path[-1]
             if last != "/":
