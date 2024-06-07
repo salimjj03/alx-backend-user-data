@@ -22,7 +22,7 @@ class Auth:
         if path is not None and excluded_paths is not None:
             for i in excluded_paths:
                 if i[-1] == "*":
-                    if i in path:
+                    if i[:-1] in path:
                         return False
 
         if path is not None:
