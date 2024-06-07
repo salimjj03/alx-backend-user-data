@@ -19,10 +19,11 @@ class Auth:
         care of them
         """
 
-        for i in excluded_paths:
-            if i[-1] == "*":
-                if i in path:
-                    return False
+        if path is not None and excluded_paths is not None:
+            for i in excluded_paths:
+                if i[-1] == "*":
+                    if i in path:
+                        return False
 
         if path is not None:
             last = path[-1]
