@@ -69,3 +69,21 @@ class Auth:
                 return False
         except Exception:
             return False
+
+    def create_session(self, email: str) -> str:
+        """
+        takes an email string argument and returns
+        the session ID as a string.
+
+        find the user corresponding to the email, generate a new
+        UUID and store it in the database as the user’s session_id,
+        then return the session ID.
+        """
+
+        try:
+            user = self._db.find_user_by(email=email)
+            session_id = _generate_uuid()
+            user.session_id = session_id
+            return session_id
+        except Exception:
+            return None
