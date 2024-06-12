@@ -134,5 +134,3 @@ class Auth:
             return u_id
         except NoResultFound:
             raise ValueError
-
-
