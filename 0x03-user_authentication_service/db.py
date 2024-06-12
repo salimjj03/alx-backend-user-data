@@ -50,7 +50,7 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **dic: dict) -> User:
+    def find_user_by(self, **dic) -> User:
         """
         his method takes in arbitrary keyword arguments and
         returns the first row found in the users table as
