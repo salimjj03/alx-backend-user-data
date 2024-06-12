@@ -96,7 +96,7 @@ def logout():
     abort(403)
 
 
-@app.route("/profile", methods=["GET"] strict_slashes=False)
+@app.route("/profile", methods=["GET"], strict_slashes=False)
 def profile():
     """
     respond to the GET /profile route.
