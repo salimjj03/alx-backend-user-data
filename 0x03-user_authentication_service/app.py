@@ -91,7 +91,7 @@ def logout():
     user = AUTH.get_user_from_session_id(session_id)
     if user is not None and session_id is not None:
         AUTH.destroy_session(user.id)
-        return redirect(url_for(home))
+        return redirect(url_for("home"))
     abort(403)
 
 
