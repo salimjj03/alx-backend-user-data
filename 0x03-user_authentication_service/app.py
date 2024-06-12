@@ -6,6 +6,7 @@ return a JSON payload of the form:
 """
 
 from flask import Flask, request, jsonify, make_response, abort
+from flask import url_for, redirect
 from auth import Auth
 
 
@@ -71,6 +72,27 @@ def login():
     session_id = AUTH.create_session(email)
     response.set_cookie("sassion_id", session_id)
     return response
+
+
+@app.route("/sessions", methods=["DELETE"], strict_slashes=False)
+def logout():
+    """
+    respond to the DELETE /sessions route.
+
+    The request is expected to contain the session ID as a cookie wit
+    key "session_id".
+
+    Find the user with the requested session ID. If the user exists
+    destroy the session and redirect the user to GET /. If the user
+    does not exist, respond with a 403 HTTP status.
+    """
+
+    session_id = request.cookies.get("session_id")
+    user = AUTH.get_user_from_session_id(session_id)
+    if user is not None:
+        AUTH.destroy_session(user.id)
+        return redirect(url_for(home))
+    abort(403)
 
 
 if __name__ == "__main__":
