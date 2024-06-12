@@ -61,10 +61,10 @@ class DB:
         for key in dic.keys():
             if key not in keys:
                 raise InvalidRequestError
-            result = self._session.query(User).filter_by(**dic).first()
-            if result is None:
-                raise NoResultFound
-            return result
+        result = self._session.query(User).filter_by(**dic).first()
+        if result is None:
+            raise NoResultFound
+        return result
 
     def update_user(self, user_id: int, **kwargs: dict) -> None:
         """
