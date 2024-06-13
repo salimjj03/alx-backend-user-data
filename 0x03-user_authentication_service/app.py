@@ -8,6 +8,7 @@ return a JSON payload of the form:
 from flask import Flask, request, jsonify, make_response, abort
 from flask import url_for, redirect
 from auth import Auth
+from db import DB
 
 
 AUTH = Auth()
@@ -103,7 +104,7 @@ def profile():
 
     The request is expected to contain a session_id cookie.
     Use it to find the user. If the user exist, respond
-    with a 200 HTTP status and the following JSON payload:
+    with a 200 HTTP status and the following JSON payload.
     """
 
     session_id = request.cookies.get("session_id")
@@ -112,6 +113,20 @@ def profile():
         if user:
             return jsonify({"email": user.email}), 200
     abort(403)
+
+@app.route("/reset_password", methods=["POST"], strict_slashes=False)
+def get_reset_password_token():
+    """
+    get reset password token
+    """
+
+    email = request.form.get("email")
+    try:
+        token = AUTH.get_reset_password_token(email)
+        return  jsonify({"email": email, "reset_token": token}), 200
+    except Exception:
+        abort(403)
+
 
 
 if __name__ == "__main__":
